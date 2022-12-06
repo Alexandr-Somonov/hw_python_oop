@@ -65,13 +65,12 @@ class Running(Training):
 
     def get_spent_calories(self):
         min_duration = self.duration * self.MIN_IN_H
-        self.calories = ((self.CALORIES_MEAN_SPEED_MULTIPLIER
-                          * self.get_mean_speed()
-                          + self.CALORIES_MEAN_SPEED_SHIFT)
-                         * self.weight
-                         / self.M_IN_KM
-                         * min_duration)
-        return self.calories
+        return ((self.CALORIES_MEAN_SPEED_MULTIPLIER
+                 * self.get_mean_speed()
+                 + self.CALORIES_MEAN_SPEED_SHIFT)
+                * self.weight
+                / self.M_IN_KM
+                * min_duration)
 
 
 class SportsWalking(Training):
@@ -92,14 +91,13 @@ class SportsWalking(Training):
         min_duration = self.duration * self.MIN_IN_H
         m_height = self.height / self.CM_IN_M
         mean_speed_in_m_sec = self.get_mean_speed() * self.KMH_IN_MSEC
-        self.calories = ((self.CALORIES_WEIGHT_MULTIPLIER
-                          * self.weight
-                          + (mean_speed_in_m_sec**2
-                             / m_height)
-                          * self.CALORIES_SPEED_HEIGHT_MULTIPLIER
-                          * self.weight)
-                         * min_duration)
-        return self.calories
+        return ((self.CALORIES_WEIGHT_MULTIPLIER
+                 * self.weight
+                 + (mean_speed_in_m_sec**2
+                    / m_height)
+                 * self.CALORIES_SPEED_HEIGHT_MULTIPLIER
+                 * self.weight)
+                * min_duration)
 
 
 class Swimming(Training):
@@ -128,12 +126,11 @@ class Swimming(Training):
                 / self.duration)
 
     def get_spent_calories(self):
-        self.calories = ((self.get_mean_speed()
-                          + self.CALORIES_MEAN_SPEED_SHIFT)
-                         * self.CALORIES_MEAN_SPEED_MULTIPLIER
-                         * self.weight
-                         * self.duration)
-        return self.calories
+        return ((self.get_mean_speed()
+                 + self.CALORIES_MEAN_SPEED_SHIFT)
+                * self.CALORIES_MEAN_SPEED_MULTIPLIER
+                * self.weight
+                * self.duration)
 
 
 def read_package(workout_type: str, data: list) -> Training:
